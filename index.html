@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset=utf-8>
+		<title>Helix</title>
+		<style>
+			canvas {
+				position: fixed;
+				width: 100%;
+				height: 100%;
+				left: 0;
+				top: 0;
+				z-index: -1;
+			}
+			.sidenav {
+				padding: 7px;
+				border: 1px solid #4CAF50;
+				height: 100%;
+				width: 200px;
+				position: fixed;
+				z-index: 1;
+				top: 0;
+				left: 0;
+				background-color: #ffff;
+				overflow-x: hidden;
+				padding-top: 20px;
+			}
+			.sidenav a {
+				padding: 6px 8px 6px 16px;
+				text-decoration: none;
+				font-size: 25px;
+				color: #ffff;
+				display: block;
+			}
+			.sidenav a:hover {
+				color: #f1f1f1;
+			}
+			.main {
+				margin-left: 160px; /* Same as the width of the sidenav */
+				font-size: 28px; /* Increased text to enable scrolling */
+				padding: 0px 10px;
+			}
+			@media screen and (max-height: 450px) {
+				.sidenav {padding-top: 15px;}
+				.sidenav a {font-size: 18px;}
+			}
+			.datePicker{
+				margin-left: 10px;
+			}
+			/* basic positioning */
+.legend { list-style: none; }
+.legend li { float: left; margin-right: 5px; }
+.legend span { border: 1px solid #ccc; float: left; width: 12px; height: 12px; margin-right: 5px; }
+/* your colors */
+.legend .lowest { background-color: #f44141; }
+.legend .low { background-color: #ffA500; }
+.legend .medium { background-color: #4167f4; }
+.legend .high { background-color: #e241f4;}
+		div.absolute {
+    position: absolute;
+		left: 500px;
+    top: 500px;
+    width: 200px;
+    height: 120px;
+		color: #ecf0f1;
+  background: -webkit-gradient(
+    linear,
+    left top, right top,
+    from(rgba(44, 62, 80, 1)),
+    to(rgba(52, 73, 94, 1))
+  );
+  background: linear-gradient(
+    to right,
+    rgba(44, 62, 80, 1) 0%,
+    rgba(52, 73, 94, 1) 100%
+  );
+	opacity: 0.9;
+}
+		</style>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+		<link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css"/>
+		<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+		<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+		<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+		<script>
+			</script>
+		<!-- Latest compiled and minified CSS -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
+
+<!-- Optional theme -->
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+
+<!-- Latest compiled and minified JavaScript -->
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
+	</head>
+	<body>
+		<div class="sidenav">
+			<h3>Filters</h3>
+			<p>
+					<label for="amount">Date range:</label>
+					<input type="text" name="datetimes" class="datePicker" />
+			</p>
+			<p></p>
+			<p>
+				<label for="amount">Price range:</label>
+				<div id="slider-range"></div>
+			</p>
+			<form>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Number of passengers</label>
+					<input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Enter email">
+				</div>
+				<div class="form-group">
+					<label for="exampleInputEmail1">Date</label>
+					<input type="text" class="form-control" id="dateInput" aria-describedby="emailHelp" placeholder="Enter email">
+				</div>
+				</form>
+				<p></p>
+				<h4>Legend</h4>
+					<ul class="legend">
+						<li><span class="lowest"></span>	 &lt; 5 000</li>
+						<li><span class="low"></span>  5 000 &gt;	&lt; 10 000</li>
+						<li><span class="medium"></span>   10 000 &gt;	&lt; 20 000</li>
+						<li><span class="high"></span>  &gt; 20 000</li>
+				</ul>
+			
+			</div>
+			<div class="panel panel-default">
+				<div class="absolute panel-body" id="tooltip">
+					<p>
+						<strong>Date: </strong>
+						<span id="dateTooltip"></span>
+					</p>
+					<p>
+						<strong id="numberTooltipTitle">Number of passengers: </strong>
+						<span id="numberTooltip"></span>
+					</p>
+					<p id="avgPar">
+						<strong>Avg Number of passengers: </strong>
+						<span id="avgTooltip"></span>
+					</p>
+				</div>
+			</div>
+		<script src="three.min.js"></script>
+		<script src="OrbitControls.js"></script>
+		<script src="dat.gui.min.js"></script>
+		<script src="helix.js"></script>
+		<script type="text/javascript" src="data.json"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/1.20.4/TweenMax.min.js"></script>
+	</body>
+</html>
