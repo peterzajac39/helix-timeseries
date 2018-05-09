@@ -101,7 +101,7 @@ function init() {
     // Create scene, camera, and rendere objects.
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    renderer = new THREE.WebGLRenderer({ alpha: true });
+    renderer = new THREE.WebGLRenderer({ alpha: true , antialias: true});
     scene.background = new THREE.Color( 0x5ff00 );
     renderer.setClearColor( 0xffffff, 0 );
     
