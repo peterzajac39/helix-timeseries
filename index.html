@@ -13,7 +13,7 @@
 				z-index: -1;
 			}
 			.sidenav {
-				padding: 7px;
+				padding: 10px;
 				border: 1px solid #4CAF50;
 				height: 100%;
 				width: 200px;
@@ -24,16 +24,6 @@
 				background-color: #ffff;
 				overflow-x: hidden;
 				padding-top: 20px;
-			}
-			.sidenav a {
-				padding: 6px 8px 6px 16px;
-				text-decoration: none;
-				font-size: 25px;
-				color: #ffff;
-				display: block;
-			}
-			.sidenav a:hover {
-				color: #f1f1f1;
 			}
 			.main {
 				margin-left: 160px; /* Same as the width of the sidenav */
@@ -96,14 +86,16 @@
 	</head>
 	<body>
 		<div class="sidenav">
-			<h3>Filters</h3>
+			<h4>Filters</h4>
 			<p>
 					<label for="amount">Date range:</label>
 					<input type="text" name="datetimes" class="datePicker" />
 			</p>
 			<p></p>
 			<p>
-				<label for="amount">Price range:</label>
+				<label for="amount">Value range:</label>
+				<span id="valueRange">0 - 40 000</span>
+
 				<div id="slider-range"></div>
 			</p>
 			<form>
@@ -124,6 +116,20 @@
 						<li><span class="medium"></span>   10 000 &gt;	&lt; 20 000</li>
 						<li><span class="high"></span>  &gt; 20 000</li>
 				</ul>
+				<br>
+				<br>
+				<br>
+				<br>
+				<br>
+					<h4>
+						Help
+					</h4>
+					<p>Application is vizualizing this <a href="https://github.com/numenta/NAB/blob/master/data/realKnownCause/nyc_taxi.csv">data.</a> It consist from <b>number of passengers in NYC taxis </b> from 1.7.14 till 31.1.2015.</p>
+					<p>You can <b>zoom</b> (mouse wheel), <b>rotate</b> (left mouse button) and <b>pan camera</b>(right mouse button).</p>
+					<p>You can toggle view between 1/2 hours and days with <b>dayView toggle button</b>.</p>
+					<p>You can <b>filter</b> with filters above.</p>
+					<p>Activate period by toggling <b>displayPeriod</b> and <b>right click on period</b> visualize just certain period.</p>
+					<p><b>Reset</b> view by toggling dayView.</p>
 			
 			</div>
 			<div class="panel panel-default">

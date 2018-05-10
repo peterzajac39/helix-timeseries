@@ -101,7 +101,7 @@ function init() {
     // Create scene, camera, and rendere objects.
     scene = new THREE.Scene();
     camera = new THREE.PerspectiveCamera(75, window.innerWidth / window.innerHeight, 0.1, 1000);
-    renderer = new THREE.WebGLRenderer({ alpha: true , antialias: true});
+    renderer = new THREE.WebGLRenderer({ alpha: true,  antialias:true });
     scene.background = new THREE.Color( 0x5ff00 );
     renderer.setClearColor( 0xffffff, 0 );
     
@@ -623,6 +623,7 @@ $(function() {
     });
   });
   $( function() {
+      var topValue, bottomValue;
     $( "#slider-range" ).slider({
         range: true,
         min: 0,
@@ -630,7 +631,9 @@ $(function() {
         values: [ 0, 14000 ],
         slide: function( event, ui ) {
             var bottom = ui.values[0];
+            bottomValue = bottom;
             var top = ui.values[1];
+            topValue = top;
             bars.forEach(bar => {
                 if (bar.userData.value >= bottom && bar.userData.value <= top){
                     bar.material.opacity = 1;
@@ -640,11 +643,19 @@ $(function() {
                     // scene.remove(bar);
                 }
             });
+            
+            $( "#valueRange" ).text( " " + bottom + " -  " + top );
         }
     });
-    $( "#amount" ).val( "$" + $( "#slider-range" ).slider( "values", 0 ) +
-        " - $" + $( "#slider-range" ).slider( "values", 1 ) );
     });
+  
+  function checkBar(bar) {
+
+    if (bar.userData.value >= bottom && bar.userData.value <= top && (bar.userData.timestamp >= startTimestamp && bar.userData.timestamp <= endTimestamp)){
+        return true;
+    } else 
+      return false;
+  }
 
   function daysInMonth (month, year) {
     return new Date(year, month, 0).getDate();
